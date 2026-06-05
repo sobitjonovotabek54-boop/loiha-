@@ -17,5 +17,4 @@ class CourseForm(forms.ModelForm):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        # HTML sahifada ko'rinadigan maydonlar
         fields = ['full_name', 'phone', 'course']

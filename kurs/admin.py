@@ -5,9 +5,8 @@ from .models import Course, Teacher, Tag, Student
 
 
 from django.contrib import admin
-from .models import Course, Teacher, Tag # Modellaringizni import qilish
+from .models import Course, Teacher, Tag, Student 
 
-# Modellarni admin panelda ko'rinadigan qilish
 admin.site.register(Course)
 admin.site.register(Teacher)
 admin.site.register(Tag)
