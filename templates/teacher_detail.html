@@ -1,0 +1,29 @@
+{% extends 'kurs/base.html' %} {# O'ZGARTIRILDI #}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 text-center">
+        {% if teacher.avatar %}
+            <img src="{{ teacher.avatar.url }}" class="img-thumbnail rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+        {% endif %}
+        <h3>{{ teacher }}</h3>
+        <p class="text-muted">E-mail: {{ teacher.user.email }}</p>
+    </div>
+    <div class="col-md-8">
+        <h4>Biografiya</h4>
+        <p class="lead">{{ teacher.bio }}</p>
+        
+        <hr>
+        <h4>O'qituvchining barcha kurslari:</h4>
+        <div class="list-group mt-3">
+            {% for course in teacher.courses.all %}
+                <a href="{% url 'course_detail' course.pk %}" class="list-group-item list-group-item-action">
+                    {{ course.title }} <small class="text-muted float-right">{{ course.created_at|date:"Y-m-d" }}</small>
+                </a>
+            {% empty %}
+                <p>Ushbu o'qituvchida hozircha kurslar yo'q.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

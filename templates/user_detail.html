@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow">
+    {% if course.image %}
+        <img src="{{ course.image.url }}" class="card-img-top" style="max-height: 400px; object-fit: cover;" alt="{{ course.title }}">
+    {% endif %}
+    <div class="card-body">
+        <h1 class="card-title">{{ course.title }}</h1>
+        <hr>
+        <p class="lead">{{ course.description }}</p>
+        
+        <div class="mt-4">
+            <h5>Teglar:</h5>
+            {% for tag in course.tags.all %}
+                <span class="badge badge-secondary p-2 mr-1">{{ tag.name }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="mt-4 p-3 bg-light rounded d-flex align-items-center">
+            <div>
+                <h5>O'qituvchi: <a href="{% url 'teacher_detail' course.teacher.pk %}">{{ course.teacher }}</a></h5>
+            </div>
+            {% if user.is_authenticated and course.teacher == user.teacher_profile %}
+                <div class="ml-auto">
+                    <a href="{% url 'kurs_update' course.pk %}" class="btn btn-warning">Tahrirlash</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
